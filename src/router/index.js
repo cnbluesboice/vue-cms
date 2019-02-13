@@ -2,24 +2,24 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 // 引入对应的组件文件
-import HomeContainer from '@/pages/home'
-import MemberContainer from '@/pages/member'
-import ShopcarContainer from '@/pages/shopcar'
-import SearchContainer from '@/pages/search'
-import newsListContainer from '@/pages/newsList'
-import newsInfoContainer from '@/pages/newsInfo'
+import HomeComponent from '@/pages/home'
+import MemberComponent from '@/pages/member'
+import ShopcarComponent from '@/pages/shopcar'
+import SearchComponent from '@/pages/search'
+import newsListComponent from '@/pages/newsList'
+import newsInfoComponent from '@/pages/newsInfo'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {path:"/",redirect:"/home"},
-    {path: '/home', component: HomeContainer},
-    {path: '/member', component: MemberContainer},
-    {path: '/shopcar', component: ShopcarContainer},
-    {path: '/search', component: SearchContainer},
-    {path: '/home/newsList', component: newsListContainer},
-    {path: '/home/newsInfo', component: newsInfoContainer},
+    {path: '/home', component: HomeComponent},
+    {path: '/member', component: MemberComponent},
+    {path: '/shopcar', component: ShopcarComponent},
+    {path: '/search', component: SearchComponent},
+    {path: '/home/newsList', component: newsListComponent},
+    {path: '/home/newsInfo/:id', component: newsInfoComponent},
   ],
   linkActiveClass: "mui-active"
 })
