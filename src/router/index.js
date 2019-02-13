@@ -6,32 +6,20 @@ import HomeContainer from '@/pages/home'
 import MemberContainer from '@/pages/member'
 import ShopcarContainer from '@/pages/shopcar'
 import SearchContainer from '@/pages/search'
+import newsListContainer from '@/pages/newsList'
+import newsInfoContainer from '@/pages/newsInfo'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {path:"/",redirect:"/home"},
-    {
-      path: '/home',
-      name: 'HomeContainer',
-      component: HomeContainer
-    },
-    {
-      path: '/member',
-      name: 'MemberContainer',
-      component: MemberContainer
-    },
-    {
-      path: '/shopcar',
-      name: 'ShopcarContainer',
-      component: ShopcarContainer
-    },
-    {
-      path: '/search',
-      name: 'SearchContainer',
-      component: SearchContainer
-    }
+    {path: '/home', component: HomeContainer},
+    {path: '/member', component: MemberContainer},
+    {path: '/shopcar', component: ShopcarContainer},
+    {path: '/search', component: SearchContainer},
+    {path: '/home/newsList', component: newsListContainer},
+    {path: '/home/newsInfo', component: newsInfoContainer},
   ],
   linkActiveClass: "mui-active"
 })
