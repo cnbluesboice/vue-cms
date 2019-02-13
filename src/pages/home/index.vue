@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     getBanner() {
-      this.$http.get("http://vue.lovegf.cn:8899/api/getlunbo").then(result => {
+      this.$http.get("api/getlunbo").then(result => {
         if (result.body.status == 0) {
           this.bannerList = result.body.message;
         }
@@ -83,7 +83,7 @@ export default {
   }
   .mui-table-view{
       img{
-          width: 58%;
+          width: 60%;
       }
   }
   .mui-grid-view.mui-grid-9{

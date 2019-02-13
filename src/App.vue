@@ -1,5 +1,5 @@
 <template>
-  <div id="app-container">
+  <div class="app-container">
     <mt-header fixed title="vue-cms小可爱"></mt-header>
 
     <transition>
@@ -34,8 +34,10 @@ export default {
 </script>
 
 <style>
-#app-container{
+.app-container{
 	padding-top: 40px;
+	padding-bottom: 50px;
+	overflow-x: hidden;
 }
 .v-enter{
 	opacity: 0;

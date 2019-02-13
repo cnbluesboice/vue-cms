@@ -4,9 +4,15 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+
+
 // 引入vue-resource
 import VueResource from "vue-resource"
 Vue.use(VueResource)
+
+// 设置请求根域名
+Vue.http.options.root="http://vue.lovegf.cn:8899/"
+// Vue.http.options.root = 'http://vue.lovegf.cn:8899/';
 
 // 按需引入mint-ui
 import "mint-ui/lib/style.css"
