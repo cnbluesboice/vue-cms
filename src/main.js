@@ -10,6 +10,8 @@ Vue.config.productionTip = false
 import VueResource from "vue-resource"
 Vue.use(VueResource)
 
+
+
 // 设置请求根域名
 Vue.http.options.root="http://vue.lovegf.cn:8899/"
 // Vue.http.options.root = 'http://vue.lovegf.cn:8899/';
@@ -24,6 +26,16 @@ Vue.component(SwipeItem.name,SwipeItem)
 // 引入mui
 import "../lib/mui/css/mui.min.css"
 import "../lib/mui/css/icons-extra.css"
+
+// 注册全局评论组件
+import commentComponent from "./components/comment"
+Vue.component("comment",commentComponent)
+
+// 注册全局过滤器
+import moment from "moment"
+Vue.filter("dateFormate",function(dateStr,pattern="YY-MM-DD HH:mm:ss"){
+  return moment(dateStr).format("YY-MM-DD HH:mm:ss")
+})
 
 /* eslint-disable no-new */
 new Vue({
