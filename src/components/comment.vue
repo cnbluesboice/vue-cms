@@ -1,6 +1,7 @@
 <template>
     <div class="comment-container">
-        <h1>comment</h1>
+        <h2>发表评论</h2>
+        <hr>
     </div>
 </template>
 <script>
