@@ -2,7 +2,7 @@
     <div class="news-info-container">
         <h1 class="title">{{ newsInfo.title }}</h1>
         <p class="subtitle">
-            <span>发表时间：{{ newsInfo.add_time | dateFormate }}</span>
+            <span>发表时间：{{ newsInfo.add_time | dateFormat }}</span>
             <span>点击：{{ newsInfo.click }}次</span>
         </p>
 
@@ -11,7 +11,7 @@
         <div v-html="newsInfo.content"></div>
 
         <!-- 评轮组件(属于全局组件) -->
-        <comment></comment>
+        <comment :commentId="id"></comment>
     </div>
 </template>
 <script>
@@ -47,6 +47,9 @@ export default {
         display: flex;
         justify-content: space-between;
         color:#22adff;
+    }
+    img{
+        width: 100%;
     }
 }
     

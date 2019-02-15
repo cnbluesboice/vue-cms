@@ -18,10 +18,11 @@ Vue.http.options.root="http://vue.lovegf.cn:8899/"
 
 // 按需引入mint-ui
 import "mint-ui/lib/style.css"
-import {Header , Swipe, SwipeItem} from "mint-ui"
+import {Header , Swipe, SwipeItem , Button} from "mint-ui"
 Vue.component(Header.name,Header)
 Vue.component(Swipe.name,Swipe)
 Vue.component(SwipeItem.name,SwipeItem)
+Vue.component(Button.name,Button)
 
 // 引入mui
 import "../lib/mui/css/mui.min.css"
@@ -33,8 +34,8 @@ Vue.component("comment",commentComponent)
 
 // 注册全局过滤器
 import moment from "moment"
-Vue.filter("dateFormate",function(dateStr,pattern="YY-MM-DD HH:mm:ss"){
-  return moment(dateStr).format("YY-MM-DD HH:mm:ss")
+Vue.filter("dateFormat",function(dateStr,pattern="YY-MM-DD HH:mm:ss"){
+  return moment(dateStr).format("YYYY-MM-DD HH:mm:ss")
 })
 
 /* eslint-disable no-new */
