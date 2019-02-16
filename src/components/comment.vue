@@ -2,7 +2,7 @@
     <div class="comment-container">
         <h1>发表评论</h1>
         <hr>
-        <textarea placeholder="请输入评论内容" maxlength="120" v-model="postContent"></textarea>
+        <textarea placeholder="请输入评论内容(最多120字)" maxlength="120" v-model="postContent"></textarea>
         <mt-button type="primary" size="large" @click="postComments">提交评论</mt-button>
 
         <div class="cmt-list">
@@ -32,7 +32,7 @@ export default {
     },
     methods:{
         getComments(){
-            this.$http.get("api/getcomments/"+this.commentId+"?pageindex="+this.pageindex).then(result=>{
+            this.$http.get("api/getcomments/"+this.id+"?pageindex="+this.pageindex).then(result=>{
                 // console.log(result)
                 // this.commentList=result.body.message
                 this.commentList=this.commentList.concat(result.body.message)
@@ -46,14 +46,15 @@ export default {
         // 提交评论
         postComments(){
             if(this.postContent.trim()=="") return Toast("请输入评论内容！")
-            this.$http.post("api/postcomment/"+this.commentId,{"content": this.postContent.trim()})
+            this.$http.post("api/postcomment/"+this.id,{"content": this.postContent.trim()})
             .then(result=>{
                 this.commentList.unshift({"user_name":"匿名用户","add_time":Date.now(),"content":this.postContent.trim()})
+                this.postContent=""
             })
         }
     },
     // 父组件传过来的id
-    props:["commentId"]
+    props:["id"]
 }
 </script>
 <style lang="scss" scoped>

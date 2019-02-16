@@ -11,7 +11,7 @@
         <div v-html="newsInfo.content"></div>
 
         <!-- 评轮组件(属于全局组件) -->
-        <comment :commentId="id"></comment>
+        <comment :id="id"></comment>
     </div>
 </template>
 <script>
