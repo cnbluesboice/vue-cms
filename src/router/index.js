@@ -10,6 +10,7 @@ import newsListComponent from '@/pages/newsList'
 import newsInfoComponent from '@/pages/newsInfo'
 import picListComponent from '@/pages/pictureList'
 import picDetailComponent from '@/pages/pictureDetail'
+import goodsListComponent from '@/pages/goodsList'
 
 Vue.use(Router)
 
@@ -24,6 +25,7 @@ export default new Router({
     {path: '/home/newsInfo/:id', component: newsInfoComponent},
     {path: '/home/picList', component: picListComponent},
     {path: '/home/picDetail/:id', component: picDetailComponent},
+    {path: '/home/goodsList', component: goodsListComponent},
   ],
   linkActiveClass: "mui-active"
 })
