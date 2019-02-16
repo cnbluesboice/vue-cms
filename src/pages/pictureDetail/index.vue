@@ -10,7 +10,7 @@
 
         <!-- 缩略图区域 -->
         <div class="thumbs">
-            <img class="preview-img" v-for="(item, index) in thumbsList" :key="item.index" :src="item.src" height="100" @click="$preview.open(index, thumbsList)">
+            <img class="preview-img" v-for="(item, index) in list" :key="item.index" :src="item.src" height="100" @click="$preview.open(index, list)">
         </div>
 
         <div class="content" v-html="picDetail.content"></div>
@@ -25,7 +25,7 @@ export default {
         return {
             id:this.$route.params.id,
             picDetail:{},
-            thumbsList:[]
+            list:[]
         }
     },
     created(){
@@ -36,15 +36,20 @@ export default {
         // 获得图片详情
         getPicDetail(){
             this.$http.get("api/getimageInfo/"+this.id).then(result=>{
-                console.log(result)
+                // console.log(result)
                 this.picDetail=result.body.message[0]
             })
         },
         // 获得缩略图
         getThumbs(){
             this.$http.get("api/getthumimages/"+this.id).then(result=>{
-                console.log(result)
-                this.thumbsList=result.body.message
+                // console.log(result)
+                this.list=result.body.message
+                this.list.forEach(item=>{
+                    item.w=600,
+                    item.h=400
+                })
+                
             })
         }
     }
@@ -66,6 +71,11 @@ export default {
     .content{
         font-size: 14px;
         line-height: 25px;
+    }
+    .thumbs{
+        img{
+            margin: 10px;
+        }
     }
 }
 </style>
