@@ -13,6 +13,7 @@ import picDetailComponent from '@/pages/pictureDetail'
 import goodsListComponent from '@/pages/goodsList'
 import goodsInfoComponent from '@/pages/goodsInfo'
 import goodsIntroComponent from '@/pages/goodsIntro'
+import goodsCommentsComponent from '@/pages/goodsComments'
 
 Vue.use(Router)
 
@@ -30,6 +31,7 @@ export default new Router({
     {path: '/home/goodsList', component: goodsListComponent},
     {path: '/home/goodsInfo/:id', component: goodsInfoComponent},
     {path: '/home/goodsIntro/:id', component: goodsIntroComponent},
+    {path: '/home/goodsComments/:id', component: goodsCommentsComponent},
   ],
   linkActiveClass: "mui-active"
 })

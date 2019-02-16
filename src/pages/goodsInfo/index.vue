@@ -49,7 +49,7 @@
           <mt-button type="primary" size="large" plain @click="goGoodsIntro(goodsInfo.id)">图文介绍</mt-button>
         </div>
         <div>
-          <mt-button type="danger" size="large" plain>商品评论</mt-button>
+          <mt-button type="danger" size="large" plain @click="goGoodsComments(goodsInfo.id)">商品评论</mt-button>
         </div>
       </div>
     </div>
@@ -84,6 +84,10 @@ export default {
     // 点击利用编程式导航跳转到图文详情页面
     goGoodsIntro(id){
         this.$router.push("/home/goodsIntro/"+id)
+    },
+    // 点击进入商品评论组件
+    goGoodsComments(id){
+        this.$router.push("/home/goodsComments/"+id)
     }
   }
 };
