@@ -1,7 +1,7 @@
 <template>
   <div class="goods-container">
     <ul class="goods-box">
-      <li v-for="item in goodsList" :key="item.id">
+      <li v-for="item in goodsList" :key="item.id" @click="goGoodsInfo(item.id)">
         <img :src="item.img_url" alt>
         <p class="title">{{ item.title }}</p>
         <div class="bottom">
@@ -47,6 +47,9 @@ export default {
     getMore(){
         this.number++
         this.getGoodsList()
+    },
+    goGoodsInfo(id){
+      this.$router.push("/home/goodsInfo/"+id)
     }
   }
 };

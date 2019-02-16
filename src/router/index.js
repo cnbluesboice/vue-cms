@@ -11,6 +11,8 @@ import newsInfoComponent from '@/pages/newsInfo'
 import picListComponent from '@/pages/pictureList'
 import picDetailComponent from '@/pages/pictureDetail'
 import goodsListComponent from '@/pages/goodsList'
+import goodsInfoComponent from '@/pages/goodsInfo'
+import goodsIntroComponent from '@/pages/goodsIntro'
 
 Vue.use(Router)
 
@@ -26,6 +28,8 @@ export default new Router({
     {path: '/home/picList', component: picListComponent},
     {path: '/home/picDetail/:id', component: picDetailComponent},
     {path: '/home/goodsList', component: goodsListComponent},
+    {path: '/home/goodsInfo/:id', component: goodsInfoComponent},
+    {path: '/home/goodsIntro/:id', component: goodsIntroComponent},
   ],
   linkActiveClass: "mui-active"
 })
