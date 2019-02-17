@@ -133,7 +133,7 @@ export default {
     },
     // 点击加入购物车小球动画
     addGoods(){
-        this.flag=true
+        this.flag=!this.flag
     }
   }
 };
