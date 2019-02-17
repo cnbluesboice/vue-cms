@@ -1,13 +1,14 @@
 <template>
   <div class="goods-info-container">
+
     <!-- 卡片视图区 -->
     <!-- 轮播图区域 -->
     <div class="mui-card">
       <!--内容区-->
       <div class="mui-card-content">
-        <mt-swipe  :auto="4000">
+        <mt-swipe :auto="4000">
           <mt-swipe-item v-for="(item) in goodsPic" :key="item.src">
-              <img :src="item.src" alt="">
+            <img :src="item.src" alt>
           </mt-swipe-item>
         </mt-swipe>
       </div>
@@ -24,10 +25,15 @@
           销售价：
           <span class="sell_price">￥{{ goodsInfo.sell_price }}</span>
         </p>
-        <p class="bugCount">购买数量：</p>
+        <p class="bugCount">
+          购买数量：
+          <input type="button" value="-" @click="count>=2 && count--">
+          <input type="text" v-model="count">
+          <input type="button" value="+" @click="count<goodsInfo.stock_quantity && count++">
+        </p>
         <p class="buttons">
           <mt-button type="primary" size="small">立即购买</mt-button>
-          <mt-button type="danger" size="small">加入购物车</mt-button>
+          <mt-button type="danger" size="small" @click="addGoods">加入购物车</mt-button>
         </p>
       </div>
     </div>
@@ -53,6 +59,11 @@
         </div>
       </div>
     </div>
+
+    <!-- 小球 -->
+    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+      <div class="ball" v-show="flag" ref="ball"></div>
+    </transition>
   </div>
 </template>
 <script>
@@ -61,55 +72,113 @@ export default {
     return {
       id: this.$route.params.id,
       goodsInfo: {},
-      goodsPic:[]
+      goodsPic: [],
+      count: 1,
+      flag: false
     };
   },
   created() {
-    this.getGoodsInfo()
-    this.getGoodsSwipe()
+    this.getGoodsInfo();
+    this.getGoodsSwipe();
   },
   methods: {
+    //   半程动画钩子
+    beforeEnter(el) {
+        // 动画进入时从原来的位置进入，没有任何偏移
+        el.style.transform="translate(0,0)"
+    },
+    enter(el, done) {
+        // 必须要加此行代码，动画才会执行，原因不明
+        el.offsetWidth
+        // console.log(this)
+        // 获取小球在页面的位置
+        // getBoundingClientRect()方法返回一个矩形对象，
+        // top,bottom,left,right四个属性的值是该元素距离页面边缘的距离
+        // 这里要使用$refs.ball来操作dom，必须在ball盒子上面加上ref="ball"
+        const ballPosition=this.$refs.ball.getBoundingClientRect();
+        // console.log(ballPosition)
+        const badgePosition=document.getElementById("badge").getBoundingClientRect();
+        // console.log(badgePosition)
+        const distanceX=badgePosition.left-ballPosition.left
+        const distanceY=badgePosition.top-ballPosition.top
+        // console.log(distanceX,"X")
+        // console.log(distanceY,"Y")
+        el.style.transform=`translate(${distanceX}px,${distanceY}px)`
+        el.style.transition="all .5s cubic-bezier(.4,-0.3,1,.68)"
+
+        done()
+    },
+    afterEnter(el) {
+        this.flag=!this.flag
+    },
     getGoodsSwipe() {
-        this.$http.get("api/getthumimages/"+this.id).then(result=>{
-            console.log(result)
-            this.goodsPic=result.body.message;
-        })
+      this.$http.get("api/getthumimages/" + this.id).then(result => {
+        // console.log(result);
+        this.goodsPic = result.body.message;
+      });
     },
     getGoodsInfo() {
       this.$http.get("api/goods/getinfo/" + this.id).then(result => {
-        console.log(result);
+        // console.log(result);
         this.goodsInfo = result.body.message[0];
       });
     },
     // 点击利用编程式导航跳转到图文详情页面
-    goGoodsIntro(id){
-        this.$router.push("/home/goodsIntro/"+id)
+    goGoodsIntro(id) {
+      this.$router.push("/home/goodsIntro/" + id);
     },
     // 点击进入商品评论组件
-    goGoodsComments(id){
-        this.$router.push("/home/goodsComments/"+id)
+    goGoodsComments(id) {
+      this.$router.push("/home/goodsComments/" + id);
+    },
+    // 点击加入购物车小球动画
+    addGoods(){
+        this.flag=true
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.mui-card-content {
-  padding: 15px;
-  .sell_price {
-    color: red;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  .mui-card-header {
-    .title {
-      font-size: 18px;
+.goods-info-container {
+  position: relative;
+  .mui-card-content {
+    padding: 15px;
+    .sell_price {
+      color: red;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    .mui-card-header {
+      .title {
+        font-size: 18px;
+      }
+    }
+    .mint-swipe {
+      height: 200px;
+      img {
+        width: 100%;
+      }
+    }
+    .bugCount {
+      input {
+        width: 35px;
+        height: 35px;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        font-size: 14px;
+      }
     }
   }
-  .mint-swipe{
-      height: 200px;
-      img{
-          width: 100%;
-      }
-  }
+  .ball {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: red;
+      border-radius: 50%;
+      left: 148px;
+      top: 358px;
+      z-index: 999;
+    }
 }
 </style>
