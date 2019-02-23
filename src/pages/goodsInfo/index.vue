@@ -131,9 +131,18 @@ export default {
     goGoodsComments(id) {
       this.$router.push("/home/goodsComments/" + id);
     },
-    // 点击加入购物车小球动画
+    // 点击加入购物车小球动画和商品添加到购物车
     addGoods(){
         this.flag=!this.flag
+        // 调用Vuex中mutations中的addTocar方法
+        // 第一个参数是方法名，第二个参数是出入的商品信息，多个信息包装成对象
+        this.$store.commit("addToCar",{
+          id:this.id,
+          count:this.count,
+          price:this.goodsInfo.sell_price,
+          selected: true
+        })
+
     }
   }
 };
