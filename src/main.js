@@ -52,6 +52,10 @@ Vue.use(VuePreview)
 import Vuex from "vuex"
 Vue.use(Vuex)
 
+// 引入vue-scroller
+import VueScroller from 'vue-scroller'
+Vue.use(VueScroller)
+
 let car=JSON.parse(localStorage.getItem("car")) || []
 let store=new Vuex.Store({
   state:{
